@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="5.952">
-    <testcase classname="As a user, I want to be able to register, view, update and delete addresses in my profile via API connection." name="When a PATCH request body containing valid authorization information and required data is sent to the /api/profile/customerAddressUpdate/(x) endpoint, it should be verified that the status code returned is 202 and the message information in the response body is &quot;address updated successfully&quot;." time="5.742">
-        <system-out><![CDATA[* Api kullanicisi "api,profile,customerAddressUpdate,384" path parametreleri set eder.passed
-* Api kullanicisi customerAddressUpdate PATCH yapmak icin valid body hazirlar.passed
-* Api kullanicisi PATCH yaparak response kaydeder...........................passed
-* Api user tests that returned status code after PATCH process is 202.......passed
-* Api user tests that after PATCH process message informatin in response bosy is "address updated successfully".passed
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="5.306">
+    <testcase classname="As an administrator, I want to be able to access and update coupon details via API link." name="When a GET request body containing valid authorization information and required data (coupon id) is sent to the /api/coupon/couponDetails endpoint, the data in the response body (id, title ,coupon_code, coupon_type, start_date, end_date, discount, discount_type, minimum_shopping, maximum_discount) , created_by, updated_by, is_expire, is_multiple_buy, created_at, updated_at ) should be verified." time="5.077">
+        <system-out><![CDATA[* Api kullanicisi "api,coupon,couponDetails" path parametreleri set eder....passed
+* Api kullanicisi sadece id bilgisi iceren ve idsi 2 olan bir body hazirlar.passed
+* Api kullanicisi GET yaparak response kaydeder.............................passed
+* Api user tests that returned status code after PATCH process is 200.......passed
+* Api user beklenen degerler ile AdminCouponPojo olusturur..................passed
+* Api user donen body icindeki degerlerini test eder........................passed
 ]]></system-out>
     </testcase>
 </testsuite>

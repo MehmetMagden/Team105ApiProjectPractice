@@ -1,21 +1,28 @@
 package stepDefinitions.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hooks.api.HooksAPI;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.junit.Assert;
+import pojos.AdminCouponPojo;
+import pojos.CouponDetail;
 import utilities.ConfigReader;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -48,6 +55,9 @@ public class CommonAPI {
                 body("userId",lessThan(100)).
                 body("body",Matchers.containsString("API"));
      */
+
+    AdminCouponPojo respPojo;
+    AdminCouponPojo expPojo;
 
 
     @Given("Api kullanicisi {string} path parametreleri set eder")
@@ -389,6 +399,87 @@ public class CommonAPI {
         HooksAPI.reqBody.put("postal_code","saepe");
         HooksAPI.reqBody.put("address_type","11");
     }
+
+    @Given("Api kullanicisi sadece id bilgisi iceren ve idsi {int} olan bir body hazirlar")
+    public void api_kullanicisi_sadece_id_bilgisi_iceren_ve_idsi_olan_bir_body_hazirlar(Integer int1) {
+
+        HooksAPI.reqBody.put("id",2);
+    }
+
+
+
+    @Given("Api user donen body icindeki degerlerini test eder")
+    public void api_user_donen_body_icindeki_degerlerini_test_eder() throws JsonProcessingException {
+
+         respPojo = response.as(AdminCouponPojo.class);
+
+         Assert.assertEquals(expPojo.getMessage(),respPojo.getMessage());
+         Assert.assertEquals(expPojo.getAdditionalProperties(),respPojo.getAdditionalProperties());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getId(),respPojo.getCouponDetails().get(0).getId());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getTitle(),respPojo.getCouponDetails().get(0).getTitle());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getCouponCode(),respPojo.getCouponDetails().get(0).getCouponCode());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getCouponType(),respPojo.getCouponDetails().get(0).getCouponType());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getStartDate(),respPojo.getCouponDetails().get(0).getStartDate());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getEndDate(),respPojo.getCouponDetails().get(0).getEndDate());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getDiscount(),respPojo.getCouponDetails().get(0).getDiscount());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getDiscountType(),respPojo.getCouponDetails().get(0).getDiscountType());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getMinimumShopping(),respPojo.getCouponDetails().get(0).getMinimumShopping());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getMaximumDiscount(),respPojo.getCouponDetails().get(0).getMaximumDiscount());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getCreatedBy(),respPojo.getCouponDetails().get(0).getCreatedBy());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getUpdatedBy(),respPojo.getCouponDetails().get(0).getUpdatedBy());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getIsExpire(),respPojo.getCouponDetails().get(0).getIsExpire());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getIsMultipleBuy(),respPojo.getCouponDetails().get(0).getIsMultipleBuy());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getCreatedAt(),respPojo.getCouponDetails().get(0).getCreatedAt());
+         Assert.assertEquals(expPojo.getCouponDetails().get(0).getUpdatedAt(),respPojo.getCouponDetails().get(0).getUpdatedAt());
+
+
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        AdminCouponPojo actualResponse =objectMapper.readValue(response.getBody().asString(),AdminCouponPojo.class);
+//
+//         Assert.assertEquals(expPojo,actualResponse);
+
+         //pojos.AdminCouponPojo<AdminCouponPojo{couponDetails=[CouponDetail{id=2, title='Orderder', couponCode='ordered', couponType=2, startDate='2021-02-26', endDate='2025-03-30', discount=10, discountType=0, minimumShopping=1, maximumDiscount=null, createdBy=740, updatedBy=740, isExpire=0, isMultipleBuy=1, createdAt='2021-11-16T18:59:20.000000Z', updatedAt='2023-03-29T22:04:18.000000Z', additionalProperties={}}], message='success', additionalProperties={}}
+         //pojos.AdminCouponPojo<AdminCouponPojo{couponDetails=[CouponDetail{id=2, title='Orderder', couponCode='ordered', couponType=2, startDate='2021-02-26', endDate='2025-03-30', discount=10, discountType=0, minimumShopping=1, maximumDiscount=null, createdBy=740, updatedBy=740, isExpire=0, isMultipleBuy=1, createdAt='2021-11-16T18:59:20.000000Z', updatedAt='2023-03-29T22:04:18.000000Z', additionalProperties={}}], message='success', additionalProperties={}}
+    }
+
+    @Given("Api user beklenen degerler ile AdminCouponPojo olusturur")
+    public void api_user_beklenen_degerler_ile_admin_coupon_pojo_olusturur() {
+
+         expPojo = new AdminCouponPojo();
+
+        CouponDetail expCouponDetail = new CouponDetail();
+
+        expCouponDetail.setId(2);
+        expCouponDetail.setTitle("Orderder");
+        expCouponDetail.setCouponCode("ordered");
+        expCouponDetail.setCouponType(2);
+        expCouponDetail.setStartDate("2021-02-26");
+        expCouponDetail.setEndDate("2025-03-30");
+        expCouponDetail.setDiscount(10);
+        expCouponDetail.setDiscountType(0);
+        expCouponDetail.setMinimumShopping(1);
+        expCouponDetail.setMaximumDiscount(null);
+        expCouponDetail.setCreatedBy(740);
+        expCouponDetail.setUpdatedBy(740);
+        expCouponDetail.setIsExpire(0);
+        expCouponDetail.setIsMultipleBuy(1);
+        expCouponDetail.setCreatedAt("2021-11-16T18:59:20.000000Z");
+        expCouponDetail.setUpdatedAt("2023-03-29T22:04:18.000000Z");
+
+        List<CouponDetail> couponDetails = new ArrayList<>();
+        couponDetails.add(expCouponDetail);
+        expPojo.setCouponDetails(couponDetails);
+        expPojo.setMessage("success");
+
+        System.out.println(expPojo);
+
+    }
+
+
+
+
+
 
 
 }
