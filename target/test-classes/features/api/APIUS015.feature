@@ -4,7 +4,7 @@ Feature: APIUS015 As an administrator, I want to be able to access customer addr
   @APIUS015_TC001
   Scenario: APIUS015_TC001 When a GET request body containing valid authorization information is sent to the /api/profile/allAddressList endpoint, it should be verified that the status code returned is 200 and the message information is "success".
 
-    *Api kullanicisi sistemde "admin" olarak giris yapar
+    * Api kullanicisi sistemde "admin" olarak giris yapar
     * Api kullanicisi "api,profile,allAddressList" path parametreleri set eder
     * Api kullanicisi response kaydeder
     * Api kullanicisi donen status kodun 200 oldugunu test eder
@@ -13,7 +13,7 @@ Feature: APIUS015 As an administrator, I want to be able to access customer addr
   @APIUS015_TC005
   Scenario: APIUS015_TC005 When a PATCH request body containing valid authorization information and required data is sent to the /api/profile/addressUpdate/(x) endpoint, it should be verified that the status code returned is 202 and the message information in the response body is "address updated successfully".
 
-    *Api kullanicisi sistemde "admin" olarak giris yapar
+    * Api kullanicisi sistemde "admin" olarak giris yapar
     * Api kullanicisi "api,profile,addressUpdate,12" path parametreleri set eder
     * Api kullanicisi addressUpdate PATCH yapmak icin valid body hazirlar
     * Api kullanicisi PATCH yaparak response kaydeder
@@ -23,7 +23,7 @@ Feature: APIUS015 As an administrator, I want to be able to access customer addr
   @APIUS015_TC006
   Scenario: APIUS015_TC006 When a PATCH request body containing valid authorization information and incorrect data is sent to the /api/profile/addressUpdate/(x) endpoint, it should be verified that the status code returned is 404 and the message information in the response body is "address not found".
 
-    *Api kullanicisi sistemde "admin" olarak giris yapar
+    * Api kullanicisi sistemde "admin" olarak giris yapar
     * Api kullanicisi "api,profile,addressUpdate,75" path parametreleri set eder
     * Api kullanicisi addressUpdate PATCH yapmak icin body hazirlar
     * Api kullanicisi PATCH yaparak response kaydeder

@@ -350,7 +350,7 @@ public class CommonAPI {
         if (statuscode==404) {
             Assert.assertTrue(responseBody.contains("status code: 404"));
         }else {
-             response.then().statusCode(statuscode);
+             response.then().assertThat().statusCode(statuscode);
         }
 
     }
