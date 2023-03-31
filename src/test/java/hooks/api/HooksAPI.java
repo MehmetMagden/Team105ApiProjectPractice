@@ -18,11 +18,7 @@ public class HooksAPI {
         spec = new RequestSpecBuilder().setBaseUri(ConfigReader.getProperty("base_url")).build(); //https://trendlifebuy.com/
     }
 
-    @Before (order = 1)
-    public void beforeGenerateToken(){
-        token = Authentication.generateToken();
-        System.out.println("tokenhook = " + token);  //tokenhook = 1309|C02fadh9Z9pvM5hVWNR09LVgRWKul9H2lkvfbc1F
-    }
+
 
 
 

@@ -60,6 +60,64 @@ public class CommonAPI {
     AdminCouponPojo expPojo;
 
 
+    @Given("Api kullanicisi sistemde {string} olarak giris yapar")
+    public void api_kullanicisi_sistemde_olarak_giris_yapar(String authenticatication) {
+        if( authenticatication.equals("admin")){
+
+            spec = new RequestSpecBuilder().setBaseUri(ConfigReader.getProperty("base_url")).build();
+
+            spec.pathParams("pp1","api","pp2","login");
+
+            Map<String,Object> dataCredentials = new HashMap<>();
+
+            dataCredentials.put("email",ConfigReader.getProperty("adminEmail"));  //"email",admin200@trendlifebuy.com
+            dataCredentials.put("password",ConfigReader.getProperty("password"));
+
+            Response response = given()
+                    .contentType(ContentType.JSON)
+                    .spec(spec)
+                    .when()
+                    .body(dataCredentials)
+                    .post("{pp1}/{pp2}");
+
+            JsonPath jsonResponse = response.jsonPath();
+
+            String token = jsonResponse.getString("token");
+
+            HooksAPI.token= token;
+
+
+        }else {
+
+            spec = new RequestSpecBuilder().setBaseUri(ConfigReader.getProperty("base_url")).build();
+
+            spec.pathParams("pp1","api","pp2","login");
+
+            Map<String,Object> dataCredentials = new HashMap<>();
+
+            dataCredentials.put("email",ConfigReader.getProperty("userEmail"));  //"email",admin200@trendlifebuy.com
+            dataCredentials.put("password",ConfigReader.getProperty("password"));
+
+            Response response = given()
+                    .contentType(ContentType.JSON)
+                    .spec(spec)
+                    .when()
+                    .body(dataCredentials)
+                    .post("{pp1}/{pp2}");
+
+            JsonPath jsonResponse = response.jsonPath();
+
+            String token = jsonResponse.getString("token");
+
+            HooksAPI.token= token;
+
+
+
+        }
+
+    }
+
+
     @Given("Api kullanicisi {string} path parametreleri set eder")
     public void api_kullanicisi_path_parametreleri_set_eder(String rawPaths) {
         // rawPaths = "api,profile,allCountries"
