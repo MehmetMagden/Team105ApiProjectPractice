@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -244,7 +245,7 @@ public class CommonAPI {
         HooksAPI.reqBody.put("postal_code","saepe");
         HooksAPI.reqBody.put("address_type","11");
 
-        System.out.println(HooksAPI.reqBody);
+       // System.out.println(HooksAPI.reqBody);
 
     }
     @Given("Api kullanicisi PATCH yaparak response kaydeder")
@@ -277,15 +278,21 @@ public class CommonAPI {
 
     }
     @Given("Api user tests that returned status code after PATCH process is {int}")
-    public void api_user_tests_that_returned_status_code_after_patch_process_is(Integer int1) {
-
-        Assert.assertTrue(responseBody.contains("status code: 404"));
+    public void api_user_tests_that_returned_status_code_after_patch_process_is(Integer statuscode) {
+        if (statuscode==404) {
+            Assert.assertTrue(responseBody.contains("status code: 404"));
+        }else {
+             response.then().statusCode(statuscode);
+        }
 
     }
     @Given("Api user tests that after PATCH process message informatin in response bosy is {string}")
-    public void api_user_tests_that_after_patch_process_message_informatin_in_response_bosy_is(String string) {
-
-        Assert.assertTrue(responseBody.contains("Not Found"));
+    public void api_user_tests_that_after_patch_process_message_informatin_in_response_bosy_is(String returnedMessage) {
+        if (returnedMessage.equalsIgnoreCase("Not Found")) {
+            Assert.assertTrue(responseBody.contains("Not Found"));
+        }else {
+            response.then().assertThat().body("message",equalTo(returnedMessage));
+        }
 
     }
 
@@ -349,6 +356,38 @@ public class CommonAPI {
 
         response.then().assertThat().body("addresses", Matchers.hasItem(expected));
 
+    }
+
+    @Given("Api kullanicisi addressUpdate PATCH yapmak icin valid body hazirlar")
+    public void api_kullanicisi_address_update_patch_yapmak_icin_valid_body_hazirlar() {
+
+        HooksAPI.reqBody.put("customer_id",38);
+        HooksAPI.reqBody.put("name","eos");
+        HooksAPI.reqBody.put("email","d@d.com");
+        HooksAPI.reqBody.put("address","11");
+        HooksAPI.reqBody.put("phone","ullam");
+        HooksAPI.reqBody.put("city","labore");
+        HooksAPI.reqBody.put("state","omnis");
+        HooksAPI.reqBody.put("country","unde");
+        HooksAPI.reqBody.put("postal_code","saepe");
+        HooksAPI.reqBody.put("address_type","11");
+
+        // System.out.println(HooksAPI.reqBody);
+
+    }
+
+    @Given("Api kullanicisi customerAddressUpdate PATCH yapmak icin valid body hazirlar")
+    public void api_kullanicisi_customer_address_update_patch_yapmak_icin_valid_body_hazirlar() {
+
+        HooksAPI.reqBody.put("name","eos");
+        HooksAPI.reqBody.put("email","d@d.com");
+        HooksAPI.reqBody.put("address","11");
+        HooksAPI.reqBody.put("phone","ullam");
+        HooksAPI.reqBody.put("city","labore");
+        HooksAPI.reqBody.put("state","omnis");
+        HooksAPI.reqBody.put("country","unde");
+        HooksAPI.reqBody.put("postal_code","saepe");
+        HooksAPI.reqBody.put("address_type","11");
     }
 
 

@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         },
         features = "src/test/resources/features/api",
         glue = {"stepDefinitions/api", "hooks/api"},
-        tags = "@APIUS016_TC009",
+        tags = " @APIUS014_TC",
         dryRun = false
 
 )
