@@ -1,7 +1,7 @@
 @API015
-Feature: Admin Address
+Feature: As an administrator, I want to be able to access customer addresses registered in the system, add new addresses and update existing addresses via API connection.
 
-  @API015_005
+  @API015_TC006
   Scenario:
 
     * Api kullanicisi "api,profile,addressUpdate,75" path parametreleri set eder
