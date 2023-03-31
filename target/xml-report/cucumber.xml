@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="3.626">
-    <testcase classname="You can log in to the system with your email and password" name="_2" time="3.026">
-        <system-out><![CDATA[* Api kullanicisi "api, login" path parametreleri set eder..................passed
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="5.442">
+    <testcase classname="As an administrator, I want to be able to access the country, state and city information and details of customer addresses registered in the system via API connection." name="When the valid authorization information and state_id are entered in the /api/profile/stateCities endpoint and 3669 is sent in the Get request body, it should be verified that the &quot;name&quot; information of the city with the id number 40325 is &quot;Kizilcahamam&quot; in the response body." time="5.195">
+        <system-out><![CDATA[* Api kullanicisi "api,profile,stateCities" path parametreleri set eder.....passed
+* Api kullanicisi country, state, city bilgileri icin gerekli id 3669 ile GET body hazirlar.passed
+* Api kullanicisi GET yaparak response kaydeder.............................passed
+* Api kullanicisi donen status kodun 200 oldugunu test eder.................passed
+* Api kullanicisi donen responda idsi 40325 olan veri için "name" infosunun "Kizilcahamam" oldugunu test eder.passed
 ]]></system-out>
     </testcase>
 </testsuite>
