@@ -82,6 +82,7 @@ public class CommonAPI {
 
             JsonPath jsonResponse = response.jsonPath();
 
+
             String token = jsonResponse.getString("token");
 
             HooksAPI.token= token;
@@ -181,6 +182,7 @@ public class CommonAPI {
         response = given()
                 .headers("Authorization","Bearer " + HooksAPI.token)
                 .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .spec(HooksAPI.spec)
                 .when()
                 .get(fullPath);
@@ -342,6 +344,7 @@ public class CommonAPI {
 
         } catch (Exception e) {
             responseBody=e.getMessage();
+            System.out.println(responseBody);
         }
 
     }
@@ -491,6 +494,9 @@ public class CommonAPI {
          Assert.assertEquals(expPojo.getCouponDetails().get(0).getUpdatedAt(),respPojo.getCouponDetails().get(0).getUpdatedAt());
 
 
+
+
+
 //        ObjectMapper objectMapper = new ObjectMapper();
 //
 //        AdminCouponPojo actualResponse =objectMapper.readValue(response.getBody().asString(),AdminCouponPojo.class);
@@ -518,12 +524,12 @@ public class CommonAPI {
         expCouponDetail.setDiscountType(0);
         expCouponDetail.setMinimumShopping(1);
         expCouponDetail.setMaximumDiscount(null);
-        expCouponDetail.setCreatedBy(740);
-        expCouponDetail.setUpdatedBy(740);
+        expCouponDetail.setCreatedBy(870);
+        expCouponDetail.setUpdatedBy(870);
         expCouponDetail.setIsExpire(0);
         expCouponDetail.setIsMultipleBuy(1);
         expCouponDetail.setCreatedAt("2021-11-16T18:59:20.000000Z");
-        expCouponDetail.setUpdatedAt("2023-03-29T22:04:18.000000Z");
+        expCouponDetail.setUpdatedAt("2023-04-01T18:44:13.000000Z");
 
         List<CouponDetail> couponDetails = new ArrayList<>();
         couponDetails.add(expCouponDetail);
